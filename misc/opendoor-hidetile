@@ -1,0 +1,21 @@
+//This macro makes a specific tile invisible and opens a door as if you had clicked on it.
+//It is also a toggle, meaning it does the reverse as well.
+//You will need to find the [id] of both the door and tile you want. In the future there may be a better way to find a particular token, such as finding one with a specific image or texture.
+//This macro probably requires Gamemaster or Assistant permissions.
+// By PaperPunk, Matez
+
+// Toggles the state of the given door via [id] between OPEN and CLOSED
+if (canvas.walls.doors[0].data.ds === CONST.WALL_DOOR_STATES.OPEN) canvas.walls.doors[0].data.ds = CONST.WALL_DOOR_STATES.CLOSED;
+else canvas.walls.doors[0].data.ds = CONST.WALL_DOOR_STATES.OPEN;
+
+// Toggle the visibility of a drawing via [id] by changing the alpha of the overall object.
+//if (canvas.drawings.objects.children[6].alpha === 1) canvas.drawings.objects.children[6].alpha = 0;
+//else canvas.drawings.objects.children[6].alpha = 1;
+
+// Toggles the visibility of a given tile via [id] between true and false
+if (!canvas.tiles.placeables[0].data.hidden) { await canvas.tiles.placeables[0].update({hidden: true});}
+else {canvas.tiles.placeables[0].update({hidden: false}); }
+
+// Update the door icon and redraw the token's sight
+canvas.walls.doors[0].doorControl.drawIcon();
+canvas.sight.initializeTokens();
